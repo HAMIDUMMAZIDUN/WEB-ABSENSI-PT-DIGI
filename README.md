@@ -83,7 +83,7 @@ Clone Repositori
 
 Bash
 
-git clone https://github.com/username-anda/nama-repositori.git
+git clone https://github.com/HAMIDUMMAZIDUN/WEB-ABSENSI-PT-DIGI.git
 cd nama-repositori
 Instal Dependensi PHP
 
