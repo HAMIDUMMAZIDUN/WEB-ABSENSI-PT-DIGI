@@ -2,12 +2,6 @@ Absensi Karyawan Berbasis Web
 
 Sebuah aplikasi web modern yang dibangun dengan Laravel untuk mengelola kehadiran karyawan secara efisien.
 
-
-https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel" alt="Laravel Version">
-https://img.shields.io/badge/PHP-8.2%2B-blue?style=for-the-badge&logo=php" alt="PHP Version">
-https://img.shields.io/badge/MySQL-8.0-orange?style=for-the-badge&logo=mysql" alt="MySQL Version">
-https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
-
 📜 Daftar Isi
 Tentang Proyek
 
