@@ -2,11 +2,28 @@
     {{-- Header Konten --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-10">
         <div>
-            <h2 class="text-3xl font-bold text-gray-900">Hello, {{ Auth::user()->name }} 👋</h2>
-            <p class="text-gray-500 mt-1">Welcome back and explore the world</p>
+        @php
+        //Mengatur zona waktu server ke Waktu Indonesia Barat
+        date_default_timezone_set('Asia/Jakarta');
+        $jam = (int)date('H');
+            @endphp
+            <h2 class="text-3xl font-bold text-gray-900">
+                Selamat
+                @if ($jam >= 4 && $jam < 11)
+                    Pagi,
+                @elseif ($jam >= 11 && $jam < 15)
+                    Siang,
+                @elseif ($jam >= 15 && $jam < 19)
+                    Sore,
+                @else
+                    Malam,
+                @endif
+            {{ Auth::user()->username }}
+        </h2>
+        <p class="text-gray-500 mt-1">Semoga Hari ini dan seterusnya diberi kelancaran untuk bekerja</p>
         </div>
         <div class="relative mt-4 sm:mt-0">
-            <input type="text" placeholder="Search direction" class="w-full sm:w-64 pl-10 pr-4 py-3 border border-gray-200 bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-green-500">
+            <input type="text" placeholder="Cari Karyawan" class="w-full sm:w-64 pl-10 pr-4 py-3 border border-gray-200 bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-green-500">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
