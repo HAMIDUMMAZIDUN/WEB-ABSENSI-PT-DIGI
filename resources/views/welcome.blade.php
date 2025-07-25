@@ -42,7 +42,8 @@
                     <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg text-center shadow-md transition-transform transform hover:scale-105">
                         <img src="{{ asset('images/hamidun1.jpg') }}" onerror="this.onerror=null;this.src='https://placehold.co/128x128/EBF4FF/7F9CF5?text=Foto';" alt="Foto Hamid Abdul Aziz" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white dark:border-gray-600 shadow-lg">
                         <h3 class="text-xl font-bold">HAMID ABDUL AZIZ</h3>
-                        <p class="text-gray-600 dark:text-gray-400">Project Manager</p>
+                        <p class="text-gray-600 dark:text-gray-400">Project Manager + Backend Developer
+                        </p>
                     </div>
 
                     <!-- Anggota 2 -->
@@ -56,7 +57,7 @@
                     <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-lg text-center shadow-md transition-transform transform hover:scale-105">
                         <img src="{{ asset('images/hamidun1.jpg') }}" onerror="this.onerror=null;this.src='https://placehold.co/128x128/EBF4FF/7F9CF5?text=Foto';" alt="Foto M.Zaky Afrilliansyah" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white dark:border-gray-600 shadow-lg">
                         <h3 class="text-xl font-bold">M.ZAKY AFRILLIANSYAH</h3>
-                        <p class="text-gray-600 dark:text-gray-400">Backend Developer</p>
+                        <p class="text-gray-600 dark:text-gray-400">Frontend Developer</p>
                     </div>
                 </div>
             </section>

@@ -11,6 +11,6 @@ class DashboardController extends Controller
     {
         // Nantinya, Anda bisa menambahkan data ke sini.
         // Contoh: $jumlahKaryawan = Employee::count();
-        return view('dashboard');
+        return view('dashboard.index');
     }
 }
