@@ -134,33 +134,45 @@
     </div>
 
     <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('calendar', () => ({
-                currentDate: new Date(2025, 4, 20), // Set ke Mei 2025, tanggal 20
-                dayNames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                monthName: '', year: '', daysInMonth: [], blankDays: [],
-                init() { this.updateCalendar(); },
-                updateCalendar() {
-                    const date = this.currentDate;
-                    this.year = date.getFullYear();
-                    this.monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
-                    const firstDayOfMonth = new Date(this.year, date.getMonth(), 1).getDay();
-                    const totalDaysInMonth = new Date(this.year, date.getMonth() + 1, 0).getDate();
-                    this.blankDays = Array.from({ length: firstDayOfMonth });
-                    this.daysInMonth = Array.from({ length: totalDaysInMonth }, (_, i) => i + 1);
-                },
-                isToday(day) {
-                    const d = new Date(this.year, this.currentDate.getMonth(), day);
-                    return this.currentDate.toDateString() === d.toDateString();
-                },
-                changeMonth(monthOffset) {
-                    const newDate = new Date(this.currentDate);
-                    newDate.setMonth(newDate.getMonth() + monthOffset);
-                    this.currentDate = newDate;
-                    this.updateCalendar();
-                }
-            }));
-        });
+       document.addEventListener('alpine:init', () => {
+    Alpine.data('calendar', () => ({
+        // currentDate diubah untuk mengambil tanggal hari ini secara otomatis
+        currentDate: new Date(),
+        dayNames: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'], // Disesuaikan ke B. Indonesia
+        monthName: '',
+        year: '',
+        daysInMonth: [],
+        blankDays: [],
+        init() {
+            this.updateCalendar();
+        },
+        updateCalendar() {
+            const date = this.currentDate;
+            this.year = date.getFullYear();
+            this.monthName = new Intl.DateTimeFormat('id-ID', { month: 'long' }).format(date); // Disesuaikan ke B. Indonesia
+            const firstDayOfMonth = new Date(this.year, date.getMonth(), 1).getDay();
+            const totalDaysInMonth = new Date(this.year, date.getMonth() + 1, 0).getDate();
+            this.blankDays = Array.from({ length: firstDayOfMonth });
+            this.daysInMonth = Array.from({ length: totalDaysInMonth }, (_, i) => i + 1);
+        },
+        // Logika isToday diubah total
+        isToday(day) {
+            const today = new Date();
+            // Fungsi ini akan mengembalikan 'true' hanya jika hari, bulan, dan tahun yang ditampilkan sama dengan hari ini.
+            return day === today.getDate() &&
+                   this.currentDate.getMonth() === today.getMonth() &&
+                   this.year === today.getFullYear();
+        },
+        changeMonth(monthOffset) {
+            const newDate = new Date(this.currentDate);
+            // setDate(1) untuk menghindari bug saat pindah bulan (misal: dari 31 Jan ke Feb)
+            newDate.setDate(1);
+            newDate.setMonth(newDate.getMonth() + monthOffset);
+            this.currentDate = newDate;
+            this.updateCalendar();
+        }
+    }));
+});
     </script>
 </body>
 </html>
