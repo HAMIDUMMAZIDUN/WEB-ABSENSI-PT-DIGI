@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest; // Kita akan gunakan ini
-use App\Providers\RouteServiceProvider;
+use App\Http\Requests\Auth\LoginRequest;
+// use App\Providers\RouteServiceProvider; // <-- BARIS INI DIHAPUS
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +13,7 @@ use Illuminate\View\View;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * ✅ Menampilkan halaman view untuk login.
-     * Method ini yang hilang dari kode Anda.
+     * Menampilkan halaman view untuk login.
      */
     public function create(): View
     {
@@ -22,24 +21,23 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * 🛡️ Menangani permintaan otentikasi yang masuk.
-     * Diperbaiki untuk menggunakan LoginRequest yang lebih aman.
+     * Menangani permintaan otentikasi yang masuk.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // Validasi dan percobaan login sudah ditangani oleh authenticate()
         $request->authenticate();
 
-        // Regenerasi session untuk keamanan
         $request->session()->regenerate();
 
-        // Redirect ke halaman yang dituju atau ke HOME
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // PERUBAHAN DI SINI:
+        // Mengarahkan ke rute bernama 'dashboard' bukan konstanta.
+        // Method intended() akan mencoba mengarahkan ke halaman yang sebelumnya ingin diakses pengguna,
+        // jika tidak ada, maka akan diarahkan ke 'dashboard'.
+        return redirect()->intended(route('dashboard'));
     }
 
     /**
-     * 🔄 Menghancurkan sesi (logout) pengguna.
-     * Method ini penting untuk fungsionalitas logout.
+     * Menghancurkan sesi (logout) pengguna.
      */
     public function destroy(Request $request): RedirectResponse
     {

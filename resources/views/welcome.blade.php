@@ -70,11 +70,11 @@
                         Aplikasi absensi berbasis web yang menggunakan RFID (Radio-Frequency Identification) adalah sebuah sistem modern untuk mencatat kehadiran secara otomatis. Karyawan atau siswa cukup menempelkan kartu atau tag RFID mereka ke sebuah alat pembaca (RFID reader), dan data kehadiran mereka akan langsung terekam dan tersimpan di database.
                     </p>
                     <!-- Tombol Aksi: Diperbarui -->
-                    <div class="mt-6 flex flex-col sm:flex-row gap-4">
-                        <a href="#" class="inline-block bg-gray-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-900 transition-all duration-300 ease-in-out text-center shadow-md">
-                            Lihat Proyek di GitHub &rarr;
-                        </a>
-                      <a href="{{ route('login') }}" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-all duration-300 ease-in-out text-center shadow-md">
+                   <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                    <a href="https://github.com/HAMIDUMMAZIDUN/WEB-ABSENSI-PT-DIGI.git" target="_blank" rel="noopener noreferrer" class="inline-block bg-gray-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-900 transition-all duration-300 ease-in-out text-center shadow-md transition-transform transform hover:scale-105">
+                        Lihat Proyek di GitHub &rarr;
+                    </a>
+                      <a href="{{ route('login') }}" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-all duration-300 ease-in-out text-center shadow-md transition-transform transform hover:scale-105">
                         Login untuk Absensi &rarr;
                      </a>
                     </div>

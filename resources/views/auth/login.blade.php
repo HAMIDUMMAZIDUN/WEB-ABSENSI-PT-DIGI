@@ -1,8 +1,9 @@
+{{-- Kode ini sudah benar dan tidak memerlukan perubahan. --}}
 <x-guest-layout>
     <div class="w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-xl">
 
         <div class="text-center">
-            <img src="{{ asset('images/hamidun.jpg') }}" alt="Logo PT" class="w-24 h-24 mx-auto mb-4 rounded-full object-cover ring-4 ring-indigo-500/10 ring-offset-2">
+            <img src="{{ asset('images/hamidun.jpg') }}" alt="Logo PT" class="w-24 h-24 mx-auto mb-4 rounded-full object-cover ring-4 ring-indigo-500/10 ring-offset-2" onerror="this.onerror=null;this.src='https://placehold.co/96x96/e0e0e0/333?text=Logo';">
             
             <h1 class="text-2xl font-bold tracking-tight text-gray-900">
                 Aplikasi Absensi Karyawan
@@ -15,6 +16,7 @@
         <form method="POST" action="{{ route('login') }}" class="space-y-6">
             @csrf
 
+            <!-- Username Input -->
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                     <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -34,6 +36,7 @@
                 <x-input-error :messages="$errors->get('username')" class="mt-2" />
             </div>
 
+            <!-- Password Input -->
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                      <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -51,6 +54,7 @@
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
             
+            <!-- Role Select -->
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
                     <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -61,8 +65,10 @@
                     <option value="administrator">Administrator</option>
                     <option value="karyawan">Karyawan</option>
                 </select>
+                 <x-input-error :messages="$errors->get('role')" class="mt-2" />
             </div>
 
+            <!-- Remember Me & Forgot Password -->
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <input id="remember-me" name="remember" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
@@ -77,6 +83,8 @@
                     @endif
                 </div>
             </div>
+
+            <!-- Submit Button -->
             <div> 
                 <x-primary-button class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-300 ease-in-out transform hover:scale-[1.02]">
                     Login

@@ -1,42 +1,56 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthenticatedSessionController; // Import controller yang benar untuk logout
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\welcomeController;
+use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Di sini Anda dapat mendaftarkan rute web untuk aplikasi Anda. Rute-rute
+| ini dimuat oleh RouteServiceProvider dan semuanya akan ditetapkan
+| ke grup middleware "web".
 |
 */
 
-// Rute utama
-Route::get('/', [welcomeController::class, 'index']);
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('welcome');
-// Rute untuk dashboard, memerlukan autentikasi
+// =========================================================================
+// RUTE PUBLIK (Dapat diakses tanpa login)
+// =========================================================================
+
+// Rute halaman utama/landing page
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+// Rute untuk dashboard, yang akan otomatis dilindungi oleh middleware 'auth'
+// dari file auth.php jika pengguna belum login.
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Grup rute yang memerlukan autentikasi
+
+// =========================================================================
+// RUTE KHUSUS AUTENTIKASI (Untuk pengguna yang sudah login)
+// =========================================================================
+
+// Grup rute ini memerlukan pengguna untuk login terlebih dahulu.
 Route::middleware('auth')->group(function () {
-    // Rute Profil
+    // Rute untuk mengelola profil pengguna
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Rute Logout yang hilang
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+    // Tambahkan rute lain yang memerlukan login di sini...
+    // Contoh:
+    // Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 });
 
-// Memuat rute-rute autentikasi lainnya (login, register, dll.)
+
+// =========================================================================
+// MEMUAT RUTE OTENTIKASI BAWAAN LARAVEL
+// =========================================================================
+
+// File ini berisi semua rute yang diperlukan untuk otentikasi,
+// seperti login, logout, register, lupa password, dll.
+// Dengan ini, Anda tidak perlu mendefinisikan rute login/logout secara manual.
 require __DIR__.'/auth.php';

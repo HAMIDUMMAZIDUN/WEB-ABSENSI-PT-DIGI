@@ -13,6 +13,18 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- 
+          SKRIP YANG DIPERBAIKI: Logika untuk menerapkan tema HANYA berdasarkan pilihan pengguna.
+          Skrip ini hanya memeriksa localStorage dan tidak lagi memeriksa preferensi sistem.
+        --}}
+        <script>
+            // Hanya terapkan mode gelap jika 'darkMode' di localStorage secara eksplisit bernilai 'true'.
+            if (localStorage.getItem('darkMode') === 'true') {
+              document.documentElement.classList.add('dark');
+            }
+        </script>
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
