@@ -41,7 +41,7 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     <span class="ml-3 font-semibold">Dashboard</span>
                 </a>
-                <a href="{{ route('karyawan') }}"  class="flex items-center px-4 py-3 rounded-xl {{ request()->routeIs('karyawan') ? 'bg-green-500 text-white shadow-lg' : 'text-gray-500 hover:bg-gray-100' }}">
+                <a href="{{ route('karyawan.index') }}"  class="flex items-center px-4 py-3 rounded-xl {{ request()->routeIs('karyawan.index') ? 'bg-green-500 text-white shadow-lg' : 'text-gray-500 hover:bg-gray-100' }}">
                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 00-2-2H5z"></path></svg>
                     <span class="ml-3 font-semibold">Karyawan</span>
                 </a>
