@@ -28,7 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // - karyawan.create (GET /karyawan/create)
     // - karyawan.store (POST /karyawan)
     // - dan lainnya...
-    Route::resource('karyawan', KaryawanController::class);
+   Route::resource('karyawan', KaryawanController::class);
     
     // Rute untuk mengelola profil pengguna
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

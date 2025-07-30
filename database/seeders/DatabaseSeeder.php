@@ -16,9 +16,15 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Administrator',
             'username' => 'admin',
-            'email' => 'admin@example.com', // <-- TAMBAHKAN BARIS INI
+            'email' => 'admin@example.com',
             'password' => Hash::make('123'),
             'role' => 'administrator'
         ]);
+         {
+        $this->call([
+            AdminUserSeeder::class,
+           
+        ]);
+    }
     }
 }
