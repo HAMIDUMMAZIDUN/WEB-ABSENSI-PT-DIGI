@@ -10,9 +10,12 @@ return new class extends Migration
      * Run the migrations.
      */public function up()
 {
-    Schema::table('master_karyawan', function (Blueprint $table) {
-        // Menambahkan kolom untuk menyimpan path foto, bisa null
-        $table->string('photo')->nullable()->after('email');
+    Schema::create('master_karyawan', function (Blueprint $table) {
+        $table->id();
+        // ... (other existing columns in your create migration)
+        $table->string('email')->nullable(); // Add this line
+        $table->string('photo')->nullable(); // Add this line
+        $table->timestamps();
     });
 }
 

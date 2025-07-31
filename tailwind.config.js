@@ -9,6 +9,17 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    safelist: [
+        // Daftar semua kemungkinan warna dept_colour yang akan Anda gunakan
+        'bg-red-500',
+        'bg-green-500',
+        'bg-purple-500',
+        'bg-indigo-500',
+        'bg-gray-500',
+        'bg-blue-500', // Tambahkan jika ada
+        // Tambahkan semua warna bg-X-500 lainnya yang Anda gunakan untuk dept_colour
+    ],
+
     theme: {
         extend: {
             fontFamily: {
