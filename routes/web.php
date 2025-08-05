@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\KehadiranController; 
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,20 +18,22 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // Grup rute ini memerlukan pengguna untuk login (terotentikasi)
 Route::middleware(['auth', 'verified'])->group(function () {
-    
+
     // RUTE DASHBOARD
     Route::get('/dashboard', function () {
-        return view('dashboard.index'); 
+        return view('dashboard.index');
     })->name('dashboard');
-        
+
     // RUTE KARYAWAN (SUDAH DIPERBAIKI)
-    // Ini akan otomatis membuat route:
-    // - karyawan.index (GET /karyawan)
-    // - karyawan.create (GET /karyawan/create)
-    // - karyawan.store (POST /karyawan)
-    // - dan lainnya...
-   Route::resource('karyawan', KaryawanController::class);
-    
+    Route::resource('karyawan', KaryawanController::class);
+
+    // RUTE REKAP ABSENSI
+    Route::get('/rekap-absensi', [AbsensiController::class, 'index'])->name('rekap.absensi');
+
+    // RUTE SCAN KEHADIRAN (BARU DITAMBAHKAN)
+    Route::get('/scan-kehadiran', [KehadiranController::class, 'create'])->name('scan.kehadiran'); 
+    Route::post('/scan-kehadiran', [KehadiranController::class, 'store'])->name('scan.kehadiran.store'); 
+
     // Rute untuk mengelola profil pengguna
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
