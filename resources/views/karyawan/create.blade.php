@@ -32,8 +32,6 @@
             <form id="employeeForm" method="POST" action="{{ route('karyawan.store') }}">
                 @csrf
 
-                {{-- Bagian Upload Foto (hanya tampilan, tanpa fungsionalitas) --}}
-                
 <div class="bg-white p-8 rounded-lg shadow-sm">
     {{-- PERUBAHAN PENTING: Tambahkan enctype untuk upload file --}}
     <form id="employeeForm" method="POST" action="{{ route('karyawan.store') }}" enctype="multipart/form-data">

@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\MasterKaryawan;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule; // Add this for unique validation on update
+use Illuminate\Validation\Rule;
 
 class KaryawanController extends Controller
 {
     /**
-     * PERBAIKAN: Method index() ditambahkan kembali.
      * Menampilkan daftar karyawan dengan fitur pencarian dan paginasi AJAX.
      */
     public function index(Request $request)
@@ -54,16 +53,17 @@ class KaryawanController extends Controller
             'dept'        => 'required|string',
             'role'        => 'required|string',
             'join_date'   => 'required|date_format:d/m/Y',
-            'photo'       => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
+            'photo'       => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $dataToStore = $validatedData;
 
+        // Simpan foto di local public
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('photos', $fileName, 'public');
-            $dataToStore['photo'] = $filePath;
+            $file->move(public_path('photos/karyawan'), $fileName);
+            $dataToStore['photo'] = 'photos/karyawan/' . $fileName;
         }
 
         switch ($validatedData['dept']) {
@@ -79,15 +79,13 @@ class KaryawanController extends Controller
 
         MasterKaryawan::create($dataToStore);
 
-        // Pesan sukses untuk SweetAlert
         return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil ditambahkan!');
     }
 
     /**
      * Show the form for editing the specified resource.
-     * Route will automatically inject MasterKaryawan instance based on ID.
      */
-    public function edit(MasterKaryawan $karyawan) // Using Route Model Binding
+    public function edit(MasterKaryawan $karyawan)
     {
         return view('karyawan.edit', compact('karyawan'));
     }
@@ -95,50 +93,38 @@ class KaryawanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MasterKaryawan $karyawan) // Using Route Model Binding
+    public function update(Request $request, MasterKaryawan $karyawan)
     {
         $validatedData = $request->validate([
-            'nama'        => 'required|string|max:255',
-            'email'       => [
-                                'required',
-                                'email',
-                                Rule::unique('master_karyawan')->ignore($karyawan->id), // Ignore current record's email
-                             ],
-            'nik'         => [
-                                'required',
-                                'digits:16',
-                                Rule::unique('master_karyawan')->ignore($karyawan->id), // Ignore current record's NIK
-                             ],
-            'phone'       => 'required|string|max:20',
-            'alamat'      => 'required|string',
-            'dept'        => 'required|string',
-            'role'        => 'required|string',
-            'join_date'   => 'required|date_format:d/m/Y',
-            'photo'       => 'sometimes|image|mimes:jpeg,png,jpg|max:2048', // photo is optional on update
+            'nik' => ['required', 'string', 'max:255', Rule::unique('master_karyawan')->ignore($karyawan->id)],
+            'nama' => 'required|string|max:255',
+            'email' => ['required', 'email', 'max:255', Rule::unique('master_karyawan')->ignore($karyawan->id)],
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'phone' => 'required|string|max:255',
+            'alamat' => 'required|string',
+            'dept' => 'required|string',
+            'role' => 'required|string',
+            'join_date' => 'required|date_format:d/m/Y',
         ]);
-
+        
         $dataToUpdate = $validatedData;
 
-        // Handle photo upload/update
+        // Proses foto baru
         if ($request->hasFile('photo')) {
-            // Delete old photo if exists
-            if ($karyawan->photo) {
-                Storage::disk('public')->delete($karyawan->photo);
+            // Hapus foto lama dari public folder jika ada
+            if ($karyawan->photo && file_exists(public_path($karyawan->photo))) {
+                unlink(public_path($karyawan->photo));
             }
+            
+            // Simpan foto baru di public folder
             $file = $request->file('photo');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            $filePath = $file->storeAs('photos', $fileName, 'public');
-            $dataToUpdate['photo'] = $filePath;
-        } else {
-            // If no new photo uploaded, retain existing one if photo field is not provided
-            if (!isset($dataToUpdate['photo']) && $karyawan->photo) {
-                 $dataToUpdate['photo'] = $karyawan->photo;
-            }
+            $file->move(public_path('photos/karyawan'), $fileName);
+            $dataToUpdate['photo'] = 'photos/karyawan/' . $fileName;
         }
 
-
-        // Re-calculate dept_colour based on new dept (if dept changed)
-        switch ($dataToUpdate['dept']) {
+        // Handle department color
+        switch ($validatedData['dept']) {
             case 'Engineer': $dataToUpdate['dept_colour'] = '#EF4444'; break;
             case 'Marketing': $dataToUpdate['dept_colour'] = '#22C55E'; break;
             case 'Finance': $dataToUpdate['dept_colour'] = '#A855F7'; break;
@@ -146,34 +132,27 @@ class KaryawanController extends Controller
             default: $dataToUpdate['dept_colour'] = '#6B7280';
         }
 
-        $dataToUpdate['status'] = 'aktif'; // Or get from request if form allows
-        $dataToUpdate['status_colour'] = 'green'; // Or get from request if form allows
-
+        // Format tanggal
         $dataToUpdate['join_date'] = Carbon::createFromFormat('d/m/Y', $validatedData['join_date'])->format('Y-m-d');
-
+        
         $karyawan->update($dataToUpdate);
 
-        // Pesan sukses untuk SweetAlert
-        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil diperbarui!');
+        return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MasterKaryawan $karyawan) // Using Route Model Binding
+    public function destroy(MasterKaryawan $karyawan)
     {
         try {
-            // Delete photo from storage if exists
-            if ($karyawan->photo) {
-                Storage::disk('public')->delete($karyawan->photo);
+            // Hapus foto dari public folder jika ada
+            if ($karyawan->photo && file_exists(public_path($karyawan->photo))) {
+                unlink(public_path($karyawan->photo));
             }
-
             $karyawan->delete();
-
-            // Pesan sukses untuk SweetAlert
             return redirect()->route('karyawan.index')->with('success', 'Data karyawan berhasil dihapus!');
         } catch (\Exception $e) {
-            // Pesan error untuk SweetAlert
             return redirect()->route('karyawan.index')->with('error', 'Gagal menghapus data karyawan: ' . $e->getMessage());
         }
     }

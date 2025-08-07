@@ -16,12 +16,13 @@
         </div>
     </x-slot>
 
-    {{-- Konten Utama (Card Tabel Karyawan) --}}
-    <div class="bg-white rounded-lg shadow-sm">
-        {{-- Header Card --}}
-        <div class="flex items-center justify-between p-6 border-b border-gray-200">
+    {{-- Container Utama untuk Konten --}}
+<div class="bg-white rounded-lg shadow-sm">
+
+    {{-- Header Card dengan Search Form - Menggunakan Sticky --}}
+    <div class="sticky top-0 z-20 bg-white border-b border-gray-200 rounded-t-lg">
+        <div class="flex items-center justify-between p-6">
             <div class="flex items-center space-x-4">
-                {{-- PERUBAHAN: Ikon disesuaikan dengan gambar --}}
                 <div class="p-3 bg-green-100 rounded-lg">
                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.125-1.274-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.125-1.274.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 </div>
@@ -39,27 +40,36 @@
                     </div>
                 </div>
             </form>
-
         </div>
+    </div>
 
-        {{-- Tabel Data --}}       
-        <div id="karyawan-data-container">
-            {{-- Tampilkan pesan loading, awalnya disembunyikan --}}
-            <div id="loading-indicator" style="display: none;" class="text-center p-8">
-                <p class="text-gray-500">Mencari...</p>
-            </div>
-            
-            {{-- Muat tabel untuk pertama kali menggunakan @include --}}
-            @include('karyawan.karyawan-table', ['employees' => $employees])
+    {{-- Tabel Data --}}       
+    <div id="karyawan-data-container" class="overflow-x-auto">
+        {{-- Tampilkan pesan loading, awalnya disembunyikan --}}
+        <div id="loading-indicator" style="display: none;" class="text-center p-8">
+            <p class="text-gray-500">Mencari...</p>
         </div>
+        
+        {{-- Muat tabel untuk pertama kali menggunakan @include --}}
+        {{-- Perhatikan: Saya asumsikan file ini berisi <table>...</table> --}}
+        @include('karyawan.karyawan-table', ['employees' => $employees])
+    </div>
     
-            {{-- PERUBAHAN: Tombol Tambah Data ditambahkan di bawah card --}}
-            <div class="flex justify-end mt-6">
-                <a href="{{ route('karyawan.create') }}" class="flex items-center px-6 py-3 space-x-2 font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                    <span>Tambah Data</span>
-                </a>
-            </div>
+    {{-- Tombol Tambah Data dan Paginasi --}}
+    <div class="flex justify-between items-center p-6 bg-white rounded-b-lg">
+        {{-- Paginasi --}}
+        <div class="flex-grow">
+            {{ $employees->links() }}
+        </div>
+
+        {{-- Tombol Tambah Data --}}
+        <div class="flex justify-end">
+            <a href="{{ route('karyawan.create') }}" class="flex items-center px-6 py-3 space-x-2 font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                <span>Tambah Data</span>
+            </a>
+        </div>
+    </div>
             <script>
             document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('searchInput');

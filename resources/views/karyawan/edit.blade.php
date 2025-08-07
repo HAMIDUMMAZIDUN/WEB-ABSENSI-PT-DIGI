@@ -1,4 +1,4 @@
-@extends('layouts.app') {{-- Ganti dengan layout utama aplikasi Anda jika ada --}}
+@extends('layouts.app') 
 
 @section('content')
     <div class="container mx-auto px-4 py-8">

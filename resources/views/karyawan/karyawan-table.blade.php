@@ -1,5 +1,5 @@
 <table class="min-w-full divide-y divide-gray-200">
-    <thead>
+    <thead class="sticky top-0 bg-gray-100 z-10">
         <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No.</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Foto</th>
@@ -82,8 +82,3 @@
         @endif
     </tbody>
 </table>
-
-{{-- Tambahkan link paginasi jika Anda menggunakan paginate() --}}
-<div class="mt-4">
-    {{ $employees->links() }}
-</div>
