@@ -114,30 +114,7 @@
                 </div>
             </div>
 
-            <div class="mt-8">
-                <div class="flex justify-between items-center mb-4">
-                    <h4 class="font-bold text-lg text-gray-900">My Schedule</h4>
-                    <button><svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
-                </div>
-                <div class="space-y-4">
-                    <div class="flex items-center space-x-4 p-2 bg-white rounded-xl shadow-sm">
-                        <img src="https://placehold.co/64x64/34D399/FFFFFF?text=J" alt="[Gambar dari Crooked Forest]" class="w-16 h-16 rounded-lg object-cover">
-                        <div>
-                            <p class="font-semibold text-gray-800">Crooked Forest</p>
-                            <p class="text-sm text-gray-500">28 May - 23 may</p>
-                        </div>
-                        <p class="ml-auto font-semibold text-gray-800">+2</p>
-                    </div>
-                     <div class="flex items-center space-x-4 p-2 bg-white rounded-xl shadow-sm">
-                        <img src="https://placehold.co/64x64/60A5FA/FFFFFF?text=J" alt="[Gambar dari Fem Waterfall]" class="w-16 h-16 rounded-lg object-cover">
-                        <div>
-                            <p class="font-semibold text-gray-800">Fem Waterfall</p>
-                            <p class="text-sm text-gray-500">28 May - 23 may</p>
-                        </div>
-                        <p class="ml-auto font-semibold text-gray-800">+2</p>
-                    </div>
-                </div>
-            </div>
+           
         </aside>
     </div>
 

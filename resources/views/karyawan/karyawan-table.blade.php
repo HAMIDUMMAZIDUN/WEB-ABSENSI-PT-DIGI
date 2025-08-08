@@ -29,7 +29,7 @@
                         @endif
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $data->nik }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $data->nama }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $data->nama_karyawan }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $data->email }}</td>
                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         @php
@@ -41,12 +41,11 @@
                                 'Sales' => 'bg-purple-500',
                                 'Engineer' => 'bg-red-500',
                                 'Product' => 'bg-indigo-500',
-                                // Tambahkan semua departemen dan kelas warna yang sesuai
                             ];
-                            $currentDeptColorClass = $deptColors[$data->dept] ?? 'bg-gray-500'; // Default jika tidak ditemukan
+                            $currentDeptColorClass = $deptColors[$data->bagian] ?? 'bg-gray-500'; 
                         @endphp
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $currentDeptColorClass }} text-white">
-                            {{ $data->dept }}
+                            {{ $data->bagian }}
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $data->role }}</td>
