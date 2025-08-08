@@ -12,10 +12,9 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        {{-- Menambahkan style untuk background --}}
         <style>
             .bg-auth-image {
-                background-image: url('{{ asset('images/sakola.jpg') }}');
+                background-image: url('{{ asset('images/loginptdigitekno.png') }}');
                 background-size: cover;
                 background-position: center;
             }

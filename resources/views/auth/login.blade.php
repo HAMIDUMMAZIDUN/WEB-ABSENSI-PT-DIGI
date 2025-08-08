@@ -1,9 +1,8 @@
-{{-- Kode ini sudah benar dan tidak memerlukan perubahan. --}}
 <x-guest-layout>
     <div class="w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-xl">
 
         <div class="text-center">
-            <img src="{{ asset('images/hamidun.jpg') }}" alt="Logo PT" class="w-24 h-24 mx-auto mb-4 rounded-full object-cover ring-4 ring-indigo-500/10 ring-offset-2" onerror="this.onerror=null;this.src='https://placehold.co/96x96/e0e0e0/333?text=Logo';">
+            <img src="{{ asset('images/digitekno.png') }}" alt="Logo PT" class="w-24 h-24 mx-auto mb-4 rounded-full object-cover ring-4 ring-indigo-500/10 ring-offset-2" onerror="this.onerror=null;this.src='https://placehold.co/96x96/e0e0e0/333?text=Logo';">
             
             <h1 class="text-2xl font-bold tracking-tight text-gray-900">
                 Aplikasi Absensi Karyawan
@@ -52,19 +51,6 @@
                     placeholder="Password"
                     autocomplete="current-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-            
-            <!-- Role Select -->
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                    <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                       <path d="M10 9a3 3 0 100-6 3 3 0 000 6zM6 8a2 2 0 11-4 0 2 2 0 014 0zM1.49 15.326a.78.78 0 01-.358-.442 3 3 0 014.308-3.516 6.484 6.484 0 00-1.905 3.959c-.023.222-.014.442.028.658a.78.78 0 01-.585.869l-1.512.378a.78.78 0 01-.97-.923zM18.51 15.326a.78.78 0 00.358-.442 3 3 0 00-4.308-3.516 6.484 6.484 0 011.905 3.959c.023.222.014.442-.028.658a.78.78 0 00.585.869l1.512.378a.78.78 0 00.97-.923zM14 8a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                </div>
-                <select name="role" class="block w-full rounded-md border-gray-300 py-2 pl-10 pr-3 text-gray-900 shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <option value="administrator">Administrator</option>
-                </select>
-                 <x-input-error :messages="$errors->get('role')" class="mt-2" />
             </div>
 
             <!-- Remember Me & Forgot Password -->
