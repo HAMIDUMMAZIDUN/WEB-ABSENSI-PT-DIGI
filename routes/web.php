@@ -6,8 +6,9 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\DashboardController; // <-- DITAMBAHKAN
+use App\Http\Controllers\DashboardController; 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KeteranganKehadiranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 // Rute publik untuk halaman utama
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/keterangan-kehadiran', [KeteranganKehadiranController::class, 'index'])->name('keterangan.kehadiran');
+Route::get('/keterangan-kehadiran/pdf', [KeteranganKehadiranController::class, 'downloadPDF'])->name('keterangan.kehadiran.pdf');
 
 // Grup rute ini memerlukan pengguna untuk login (terotentikasi)
 Route::middleware(['auth', 'verified'])->group(function () {
